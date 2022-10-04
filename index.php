@@ -5,12 +5,17 @@
 
 session_start();
 
+$_SESSION["servername"] = "localhost";
+$_SESSION["sv_username"] = "root";
+$_SESSION["sv_password"] = "";
+
 if(!empty($_SESSION["user"]))
     $user = $_SESSION["user"];
 
-if(!empty($user)){
+if(!empty($gywa_user)){
     # redirecting to main page
-    echo "Redirecting to main page ... <br>";
+    header("Location: src/pages/main.html");
+    die();
 }
 
 else{
