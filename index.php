@@ -5,9 +5,9 @@
 
 session_start();
 
-$_SESSION["servername"] = "localhost";
-$_SESSION["sv_username"] = "root";
-$_SESSION["sv_password"] = "";
+$_SESSION["SERVERNAME"] = "localhost";
+$_SESSION["SV_USERNAME"] = "root";
+$_SESSION["SV_PASSWORD"] = "";
 
 if(!empty($_SESSION["user"]))
     $user = $_SESSION["user"];

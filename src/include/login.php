@@ -4,7 +4,7 @@
 
 session_start();
 
-$conn = new mysqli($_SESSION["servername"], $_SESSION["sv_username"], $_SESSION["sv_password"]);
+$conn = new mysqli($_SESSION["SERVER_NAME"], $_SESSION["SERVER_USERNAME"], $_SESSION["SERVER_PASSWORD"]);
     if($conn->connect_error){
         $msg = "Failed to connect to server!";
     }
@@ -17,7 +17,7 @@ $conn = new mysqli($_SESSION["servername"], $_SESSION["sv_username"], $_SESSION[
             $res = $conn->query($mysql_command);
 
             if($res->num_rows){
-                $_SESSION["gywa_user"] = $user;
+                $_SESSION["APP_USERNAME"] = $user;
                 $msg = "Login succesfull!";
             }
             else

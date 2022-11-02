@@ -1,8 +1,7 @@
 <?php
 
-namespace gywa;
-
-session_start();
+// check session status
+if(session_status() == PHP_SESSION_NONE)    session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -13,9 +12,10 @@ require 'path/to/PHPMailer/src/PHPMailer.php';
 require 'path/to/PHPMailer/src/SMTP.php';
 require 'vendor/autoload.php';
 
-class Mailer{
+class GWYA_Mailer{
     // attributes
     private $mail;
+
     // methods
     public function __construct()
     {
@@ -28,13 +28,13 @@ class Mailer{
         $this->mail->SMTPAuth = "true";
 
         // set admin credentials
-        $this->mail->Username = $_SESSION["admin_useremailadress"];
-        $this->mail->Password = $_SESSION["admin_userpassword"];
+        $this->mail->Username = $_SESSION["ADMIN_MAIL"];
+        $this->mail->Password = $_SESSION["ADMIN_PASSWORD"];
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->mail->Port = 465;
 
         // recipients
-        $this->mail->setFrom($_SESSION["app_useremailaddress"]);
+        $this->mail->setFrom($_SESSION["APP_USER_MAIL"]);
         for($i=0;$i<sizeof($receiver);$i++){
             $this->mail->addAddress($receiver[0], $name[0]);
         }
