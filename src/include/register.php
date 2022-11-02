@@ -1,11 +1,13 @@
 <?php
 
-// check session status
-if(session_status() == PHP_SESSION_NONE)    session_start();
+session_start();
 
 include 'include\Mailer.php';
+include 'include\function.php';
 
-$mailer = new GWYA_Mailer;
-$user = new GYWA_User;
+// if(!TestConnectionToDatabase()) $msg = "Failed to connect to database!";
+// else{
+
+// }
 
 ?>

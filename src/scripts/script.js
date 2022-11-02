@@ -13,9 +13,7 @@ $(document).ready(function(){
             url: '../include/login.php',
             data: form_data,
             success: function(data){
-                if(data == '"Login failed, wrong credentials!"'){
-                    $(".login-status").html("<p>" + data + "</p>");
-                }
+                $(".login-status").html("<p>" + data + "</p>");
             },
             error: function(req){
                 alert("Login failed, " + req.responseText + "!");

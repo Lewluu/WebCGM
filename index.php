@@ -5,14 +5,14 @@
 
 session_start();
 
-$_SESSION["SERVERNAME"] = "localhost";
-$_SESSION["SV_USERNAME"] = "root";
-$_SESSION["SV_PASSWORD"] = "";
+$_SESSION["SERVER_NAME"] = "localhost";
+$_SESSION["SERVER_USERNAME"] = "root";
+$_SESSION["SERVER_PASSWORD"] = "";
 
-if(!empty($_SESSION["user"]))
-    $user = $_SESSION["user"];
+if(!empty($_SESSION["USER"]))
+    $user = $_SESSION["USER"];
 
-if(!empty($gywa_user)){
+if(!empty($user)){
     # redirecting to main page
     header("Location: src/pages/main.html");
     die();
