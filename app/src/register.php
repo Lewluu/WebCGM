@@ -4,6 +4,8 @@ session_start();
 
 include 'functions.php';
 
-RegisterUser();
+$msg = RegisterUser();
+
+echo json_encode($msg);
 
 ?>

@@ -7,10 +7,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-require 'path/to/PHPMailer/src/Exception.php';
-require 'path/to/PHPMailer/src/PHPMailer.php';
-require 'path/to/PHPMailer/src/SMTP.php';
-require 'vendor/autoload.php';
+include '../../vendor/phpmailer/phpmailer/src/Exception.php';
+include '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+include '../../vendor/phpmailer/phpmailer/src/SMTP.php';
+include '../../vendor/autoload.php';
 
 class GWYA_Mailer{
     // attributes
@@ -19,13 +19,13 @@ class GWYA_Mailer{
     // methods
     public function __construct()
     {
-        $this->mail = new PHPMailer(true);
+        $this->mail = new PHPMailer();
     }
     public function CreateNormalMail($receiver, $name, $content, $subject){
         $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $this->mail->isSMTP();
         $this->mail->Host = "smtp.gmail.com";
-        $this->mail->SMTPAuth = "true";
+        $this->mail->SMTPAuth = true;
 
         // set admin credentials
         $this->mail->Username = $_SESSION["ADMIN_MAIL"];
@@ -46,16 +46,18 @@ class GWYA_Mailer{
 
     }
     public function CreateRegistrationMail($receiver, $name){
-        $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;
-        $this->mail->isSMTP();
+        // configure
+        $this->mail->isSMTP(true);
+        $this->mail->Mailer = "smtp";
+        $this->mail->SMTPDebug = 1;
+        $this->mail->SMTPAuth = true;
+        $this->mail->SMTPSecure = 'tls';
+        $this->mail->Port = 587;
         $this->mail->Host = "smtp.gmail.com";
-        $this->mail->SMTPAuth = "true";
 
         // set admin credentials
         $this->mail->Username = $_SESSION["APP_MAIL"];
         $this->mail->Password = $_SESSION["APP_PASSWORD"];
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $this->mail->Port = 465;
         
         // recipients
         $this->mail->addAddress($receiver, $name);
@@ -77,7 +79,7 @@ class GWYA_Mailer{
             $message = $this->mail->ErrorInfo;
         }
 
-        echo json_encode($message);
+        return $message;
     }
 }
 
