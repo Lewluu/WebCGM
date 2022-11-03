@@ -24,7 +24,7 @@ function MysqlLoginQuery(){
         $res = $conn->query($mysql_command);
 
         if($res->num_rows){
-            $_SESSION["APP-USERNAME"] = $user;
+            $_SESSION["USER"] = $user;
 
             return 'SUCCESS!';
         }
