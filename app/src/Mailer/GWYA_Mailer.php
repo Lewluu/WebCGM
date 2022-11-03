@@ -56,8 +56,8 @@ class GWYA_Mailer{
         $this->mail->Host = "smtp.gmail.com";
 
         // set admin credentials
-        $this->mail->Username = $_SESSION["APP_MAIL"];
-        $this->mail->Password = $_SESSION["APP_PASSWORD"];
+        $this->mail->Username = $_SESSION["APP-MAIL"];
+        $this->mail->Password = $_SESSION["APP-PASSWORD"];
         
         // recipients
         $this->mail->addAddress($receiver, $name);

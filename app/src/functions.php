@@ -6,7 +6,7 @@ global $conn;
 
 function ConnectToDatabase(){
     global $conn;
-    $conn = new mysqli($_SESSION["SERVER_NAME"], $_SESSION["SERVER_USERNAME"], $_SESSION["SERVER_PASSWORD"]);
+    $conn = new mysqli($_SESSION["SERVER-NAME"], $_SESSION["SERVER-USERNAME"], $_SESSION["SERVER-PASSWORD"]);
 
     if($conn->connect_error) return 0;
 
@@ -24,7 +24,7 @@ function MysqlLoginQuery(){
         $res = $conn->query($mysql_command);
 
         if($res->num_rows){
-            $_SESSION["APP_USERNAME"] = $user;
+            $_SESSION["APP-USERNAME"] = $user;
 
             return 'SUCCESS!';
         }

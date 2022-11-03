@@ -5,11 +5,11 @@
 
 session_start();
 
-$_SESSION["SERVER_NAME"] = "localhost";
-$_SESSION["SERVER_USERNAME"] = "root";
-$_SESSION["SERVER_PASSWORD"] = "";
-$_SESSION["APP_MAIL"] = "pia.generic@gmail.com";
-$_SESSION["APP_PASSWORD"] = "ipageneric15";
+$_SESSION["SERVER-NAME"] = "localhost";
+$_SESSION["SERVER-USERNAME"] = "root";
+$_SESSION["SERVER-PASSWORD"] = "";
+$_SESSION["APP-MAIL"] = "pia.generic@gmail.com";
+$_SESSION["APP-PASSWORD"] = "ipageneric15";
 
 if(!empty($_SESSION["USER"]))
     $user = $_SESSION["USER"];
