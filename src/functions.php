@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include 'Mailer/GWYA_Mailer.php';
 
 global $conn;
 
@@ -32,6 +32,21 @@ function MysqlLoginQuery(){
 
     }
     else    return 'Login failed, empty credential!';
+}
+
+function RegisterUser(){
+    if(!empty($_POST)){
+        $user_mail = $_POST["register-mail"];
+        $user_password = $_POST["register-password"];
+        $user_repassword = $_POST["register-repassword"];
+
+        if($user_password != $user_repassword)  return 'Password not the same!';
+        
+        $mail = new GWYA_Mailer();
+        $mail->CreateRegistrationMail($user_mail, "Test name");
+
+        $mail->SendMail();
+    }
 }
 
 ?>

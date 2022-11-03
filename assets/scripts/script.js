@@ -7,13 +7,15 @@ $(document).ready(function(){
         e.preventDefault();
 
         var form_data = $(this).serializeArray();
-        
         $.ajax({
             type: "POST",
-            url: '../app/login.php',
+            url: '../../src/login.php',
             data: form_data,
             success: function(data){
-                $(".login-status").html("<p>" + data + "</p>");
+                var html_text = data
+                html_text = html_text.substring(1, html_text.length -1);
+            
+                $(".login-status").html("<p>" + html_text + "</p>");
             },
             error: function(req){
                 alert("Login failed, " + req.responseText + "!");
@@ -22,8 +24,10 @@ $(document).ready(function(){
     });
 
     // register form submit
-    $(".register-form").submit(function(e){
+    $(".register-from-login").click(function(e){
         e.preventDefault()
+
+        window.location.replace("register.html");
     })
 });
 
