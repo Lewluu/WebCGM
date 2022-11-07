@@ -6,7 +6,7 @@ global $conn;
 
 function ConnectToDatabase(){
     global $conn;
-    $conn = new mysqli($_SESSION["SERVER-NAME"], $_SESSION["SERVER-USERNAME"], $_SESSION["SERVER-PASSWORD"]);
+    $conn = new mysqli($_SESSION["SERVER_NAME"], $_SESSION["SERVER_USERNAME"], $_SESSION["SERVER_PASSWORD"]);
 
     if($conn->connect_error) return 0;
 
@@ -32,21 +32,6 @@ function MysqlLoginQuery(){
 
     }
     else    return 'Login failed, empty credential!';
-}
-
-function RegisterUser(){
-    if(!empty($_POST)){
-        $user_mail = $_POST["register-mail"];
-        $user_password = $_POST["register-password"];
-        $user_repassword = $_POST["register-repassword"];
-
-        if($user_password != $user_repassword)  return 'Password not the same!';
-        
-        $mail = new GWYA_Mailer();
-        $mail->CreateRegistrationMail($user_mail, "Test name");
-
-        $mail->SendMail();
-    }
 }
 
 ?>
