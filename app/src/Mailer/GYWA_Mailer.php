@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\SMTP;
 // require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 require '../../vendor/autoload.php';
 
-class GWYA_Mailer{
+class GYWA_Mailer{
     // attributes
     private $mail;
     private $content;
@@ -46,7 +46,7 @@ class GWYA_Mailer{
         $this->mail->Body = $content;
 
     }
-    public function CreateRegistrationMail($receiver, $name){
+    public function CreateRegistrationMail($receiver, $name, $activation_code){
         // configure
         $this->mail->isSMTP(true);
         $this->mail->Mailer = "smtp";
@@ -68,7 +68,7 @@ class GWYA_Mailer{
         // content
         $this->mail->isHTML(true);
         $this->mail->Subject = "Registration mail for GYWA";
-        $this->content = "Please check the link to verify your account: <a href='http://localhost/gywa/src/verify.php'> Verify! </a>";
+        $this->content = "Please check the link to verify your account: <a href='http://localhost/gywa/src/verify.php?activation_code='".$activation_code."> Verify! </a>";
     }
     public function SendMail(){
         $msg = "";
