@@ -1,2 +1,2 @@
-# gywa
-Web application generator, written in PHP and other web technologies - gywa - Generate Your Web Application
+# wgm
+Web application for generating and managing websites, written in PHP and other web technologies - WGM - Website Generator and Manager

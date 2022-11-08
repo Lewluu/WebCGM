@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\SMTP;
 // require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 require '../../vendor/autoload.php';
 
-class GYWA_Mailer{
+class WGM_Mailer{
     // attributes
     private $mail;
     private $content;

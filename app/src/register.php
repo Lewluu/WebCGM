@@ -4,7 +4,7 @@
 
 session_start();
 
-include 'Mailer/GYWA_Mailer.php';
+include 'Mailer/WGM_Mailer.php';
 include 'functions.php';
 
 // sening registration mail
@@ -15,16 +15,17 @@ if(!empty($_POST)){
     $user_repassword = $_POST["register-repassword"];
 
     if(empty($user_mail))   $err_msg = 'Mail empty!';
+    elseif(empty(wgm_check_domain($mail)))  $err_msg = 'Incorrect domain!';
     elseif($user_password != $user_repassword)  $err_msg = 'Password not the same!';
     elseif(empty($user_password))   $err_msg = 'Password empty!';
     else{
         // check database
-        gywa_connect_to_database();
-        $activation_code = gywa_mysql_register_query();
+        wgm_connect_to_database();
+        $register_data = wgm_mysql_register_query();    // getting username and activation code
 
         if($activation_code){
-            $mail = new GYWA_Mailer();
-            $mail->CreateRegistrationMail($user_mail, "Test name", $activation_code);
+            $mail = new WGM_Mailer();
+            $mail->CreateRegistrationMail($user_mail, $register_data[0], $register_data[1]);
 
             $mail->SendMail();
         }
