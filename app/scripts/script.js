@@ -13,7 +13,6 @@ $(document).ready(function(){
             data: form_data,
             success: function(data){
                 var html_text = data;
-                html_text = html_text.substring(1, html_text.length -1);
             
                 $(".login-status").html("<p>" + html_text + "</p>");
             },
@@ -35,8 +34,6 @@ $(document).ready(function(){
             data: form_data,
             success: function(data){
                 var html_text = data;
-                // html_text = html_text.substring(1, html_text.length -1);
-                alert("Registration success!");
 
                 $(".register-status").html("<p>" + html_text + "</p>");
             },

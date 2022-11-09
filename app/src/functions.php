@@ -20,7 +20,7 @@ function wgm_mysql_login_query(){
         $user = $_POST["login-user"];
         $password = md5($_POST["login-password"]);
 
-        $sql_command = "SELECT active FROM gywa.users WHERE username='$user', password='$password'";
+        $sql_command = "SELECT active FROM gywa.users WHERE username='$user' AND password='$password'";
         $res = $conn->query($sql_command);
 
         if($res->num_rows){
@@ -64,12 +64,12 @@ function wgm_mysql_register_query(){
         $sql_command = "SELECT * FROM gywa.users WHERE email='$mail'";
         $res = $conn->query($sql_command);
 
-        if($res->num_rows){
-            $username = substr($mail, 0, strpos($mail, '@') - 1);   // getting the username, without the address
+        if(!$res->num_rows){
+            $username = substr($mail, 0, strpos($mail, '@'));   // getting the username, without the address
             $password = md5($password);     // encrypting the password
             $activation_code = bin2hex(openssl_random_pseudo_bytes(16));    // generating activation code
 
-            $sql_command = "INSERT INTO gywa.users(username, email, password, is_admin, active, activation_code) VALUES($username, $mail, $password, 0, 0, $activation_code)";
+            $sql_command = "INSERT INTO gywa.users(username, email, password, activation_code) VALUES('$username', '$mail', '$password', '$activation_code')";
             $res = $conn->query($sql_command);
 
             if(!$res){
@@ -93,7 +93,7 @@ function wgm_mysql_activate_user_query($activation_code){
     $sql_command = "UPDATE gywa.users SET active=1 WHERE activation_code='$activation_code'";
     $res = $conn->query($sql_command);
 
-    if($res->num_rows){
+    if($res){
         $msg = "Registration successful! Redirecting now to login page ...";
 
         return $msg;

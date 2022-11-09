@@ -12,7 +12,7 @@ if(!empty($_GET["activation_code"])){
     print(wgm_mysql_activate_user_query($activation_code));
 }
 else{
-    header("Location: register.php");
+    print("Activation code doesn't exists ...");
     die();
 }
 

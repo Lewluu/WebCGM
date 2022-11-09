@@ -4,7 +4,6 @@
 
 session_start();
 
-include 'Mailer/WGM_Mailer.php';
 include 'functions.php';
 
 // sening registration mail
@@ -14,27 +13,27 @@ if(!empty($_POST)){
     $user_password = $_POST["register-password"];
     $user_repassword = $_POST["register-repassword"];
 
-    if(empty($user_mail))   $err_msg = 'Mail empty!';
-    elseif(empty(wgm_check_domain($mail)))  $err_msg = 'Incorrect domain!';
-    elseif($user_password != $user_repassword)  $err_msg = 'Password not the same!';
-    elseif(empty($user_password))   $err_msg = 'Password empty!';
+    if(empty($user_mail))   $msg = 'Mail empty!';
+    elseif(empty(wgm_check_domain($user_mail)))  $msg = 'Incorrect domain!';
+    elseif($user_password != $user_repassword)  $msg = 'Password not the same!';
+    elseif(empty($user_password))   $msg = 'Password empty!';
     else{
         // check database
         wgm_connect_to_database();
         $register_data = wgm_mysql_register_query();    // getting username and activation code
 
-        if($activation_code){
-            $mail = new WGM_Mailer();
-            $mail->CreateRegistrationMail($user_mail, $register_data[0], $register_data[1]);
+        if($register_data){
+            $mailer = new WGM_Mailer();
+            $mailer->CreateRegistrationMail($user_mail, $register_data[0], $register_data[1]);
 
-            $mail->SendMail();
+            $msg = $mailer->SendMail();
         }
         else{
-            $err_msg = "User already exists! Check mail for account activation!";
+            $msg = "User already exists! Check mail for account activation!";
         }
     }
 }
 
-if(!empty($err_msg))    echo json_encode($err_msg);
+if(!empty($msg))    echo json_encode($msg);
 
 ?>

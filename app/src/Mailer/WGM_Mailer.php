@@ -68,7 +68,7 @@ class WGM_Mailer{
         // content
         $this->mail->isHTML(true);
         $this->mail->Subject = "Registration mail for GYWA";
-        $this->content = "Please check the link to verify your account: <a href='http://localhost/gywa/src/verify.php?activation_code='".$activation_code."> Verify! </a>";
+        $this->content = "Please check the link to verify your account: <a href='http://localhost/websitegm/app/src/verify.php?activation_code=$activation_code'> Verify! </a>";
     }
     public function SendMail(){
         $msg = "";
